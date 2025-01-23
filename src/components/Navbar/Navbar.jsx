@@ -52,7 +52,7 @@ const Navbar = () => {
         <LoginLink>Sign in</LoginLink>
         <RegisterLink>Sign up</RegisterLink>
       </div>
-    </nav>
+    </nav> 
   );
 };
 
