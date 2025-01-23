@@ -86,46 +86,49 @@ export default function Home() {
         </div>
       )}
 
-      {/* Pagination Controls */}
-      <div className="flex justify-center items-center mt-8 space-x-2">
-        {/* Previous Button */}
-        <button
-          className="px-4 py-2 bg-gray-200 text-gray-700 rounded-l disabled:opacity-50"
-          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-          disabled={page === 1}
-        >
-          Previous
-        </button>
+     {/* Pagination Controls */}
+<div className="flex flex-wrap justify-center items-center mt-8 space-x-2">
+  {/* Previous Button */}
+  <button
+    className="px-3 py-2 text-sm bg-gray-200 text-gray-700 rounded-l disabled:opacity-50"
+    onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+    disabled={page === 1}
+  >
+    Previous
+  </button>
 
-        {/* Page Numbers */}
-        {paginationRange.map((pageNumber) => (
-          <button
-            key={pageNumber}
-            className={`px-4 py-2 ${
-              pageNumber === page
-                ? 'bg-blue-500 text-white'
-                : 'bg-gray-200 text-gray-700'
-            } rounded`}
-            onClick={() => setPage(pageNumber)}
-          >
-            {pageNumber}
-          </button>
-        ))}
+  {/* Page Numbers */}
+  <div className="flex flex-wrap justify-center items-center space-x-1">
+    {paginationRange.map((pageNumber) => (
+      <button
+        key={pageNumber}
+        className={`px-3 py-2 text-sm ${
+          pageNumber === page
+            ? 'bg-blue-500 text-white'
+            : 'bg-gray-200 text-gray-700'
+        } rounded`}
+        onClick={() => setPage(pageNumber)}
+      >
+        {pageNumber}
+      </button>
+    ))}
 
-        {/* Ellipsis */}
-        {paginationRange[paginationRange.length - 1] < TOTAL_PAGES && (
-          <span className="px-4 py-2">...</span>
-        )}
+    {/* Ellipsis */}
+    {paginationRange[paginationRange.length - 1] < TOTAL_PAGES && (
+      <span className="px-3 py-2 text-sm">...</span>
+    )}
+  </div>
 
-        {/* Next Button */}
-        <button
-          className="px-4 py-2 bg-gray-200 text-gray-700 rounded-r disabled:opacity-50"
-          onClick={() => setPage((prev) => Math.min(prev + 1, TOTAL_PAGES))}
-          disabled={page === TOTAL_PAGES}
-        >
-          Next
-        </button>
-      </div>
+  {/* Next Button */}
+  <button
+    className="mt-6 sm:mt-0 px-3 py-2 text-sm bg-gray-200 text-gray-700 rounded-r disabled:opacity-50"
+    onClick={() => setPage((prev) => Math.min(prev + 1, TOTAL_PAGES))}
+    disabled={page === TOTAL_PAGES}
+  >
+    Next
+  </button>
+</div>
+
 
       {/* Total Pages Info */}
       <div className="text-center mt-4 text-gray-600">
