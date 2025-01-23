@@ -1,10 +1,18 @@
 import Link from "next/link";
+import {
+  RegisterLink,
+  LoginLink,
+} from "@kinde-oss/kinde-auth-nextjs/components";
 
 const Navbar = () => {
   const links = (
     <>
-      <li><Link href="/">Home</Link></li>
-      <li><Link href="/profile">Profile</Link></li>
+      <li>
+        <Link href="/">Home</Link>
+      </li>
+      <li>
+        <Link href="/profile">Profile</Link>
+      </li>
     </>
   );
 
@@ -38,12 +46,11 @@ const Navbar = () => {
         <a className="btn btn-ghost text-xl">Article Atlas</a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          {links}
-        </ul>
+        <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        <Link href="/login" className="btn">Login</Link>
+        <LoginLink>Sign in</LoginLink>
+        <RegisterLink>Sign up</RegisterLink>
       </div>
     </nav>
   );
