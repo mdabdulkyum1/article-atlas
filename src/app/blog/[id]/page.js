@@ -48,7 +48,7 @@ const BlogDetails = () => {
     <div className="container mx-auto p-4">
     <div className="bg-white shadow-lg rounded-lg p-6 transition-transform transform hover:scale-105">
       {/* Blog Title */}
-      <h1 className="text-4xl font-bold text-gray-800 mb-4 border-b-2 border-blue-500 pb-2">
+      <h1 className="text-xl md:text-4xl font-bold text-gray-800 mb-4 border-b-2 border-blue-500 pb-2">
       {post.title.charAt(0).toUpperCase() + post.title.slice(1)}
       </h1>
       
