@@ -75,7 +75,7 @@ export default function Home() {
               </div>
               <div className="p-4 bg-gray-100">
                 <Link
-                  href={`/post/${post.id}`}
+                  href={`/blog/${post.id}`}
                   className="text-blue-500 font-medium hover:underline"
                 >
                   Read More
