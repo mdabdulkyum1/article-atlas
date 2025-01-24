@@ -2,9 +2,10 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 
 export default async function ProfilePage() {
-  const { isAuthenticated, user } = getKindeServerSession();
-
-  // Redirect to the login page if not authenticated, with post-login redirect URL
+  const { isAuthenticated, getUser } = getKindeServerSession();
+ 
+  const user = getUser();
+  
   if (!(await isAuthenticated())) {
     redirect(`/api/auth/login?post_login_redirect_url=/profile`);
   }
