@@ -1,9 +1,15 @@
 
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
+import {redirect} from "next/navigation";
+
 export default async function ProfilePage() {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  
+  const {isAuthenticated} = getKindeServerSession();
+
+  if (!(await isAuthenticated())) {
+    redirect("/api/auth/login");
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-light-gray px-4 py-8">
@@ -24,4 +30,6 @@ export default async function ProfilePage() {
     </div>
   );
 }
- 
+
+
+
