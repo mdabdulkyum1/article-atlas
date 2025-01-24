@@ -1,8 +1,4 @@
 import Link from "next/link";
-import {
-  RegisterLink,
-  LoginLink,
-} from "@kinde-oss/kinde-auth-nextjs/components";
 
 const Navbar = () => {
   const links = (
@@ -48,9 +44,9 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
-      <div className="navbar-end">
-        <LoginLink>Sign in</LoginLink>
-        <RegisterLink>Sign up</RegisterLink>
+      <div className="navbar-end gap-3">
+        <Link href="/api/auth/login" className="btn btn-sm bg-slate-600 text-white">Sign in</Link>
+        <Link href="/api/auth/register" className="btn btn-sm bg-slate-600 text-white">Sign up</Link>
       </div>
     </nav> 
   );
