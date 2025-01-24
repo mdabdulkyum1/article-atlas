@@ -1,23 +1,25 @@
-// app/profile/page.js
-
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { NextResponse } from "next/server";
 
-export default async function ProfilePage() {
-  // Check if the user is authenticated using Kinde Auth
-  const { isAuthenticated } = getKindeServerSession();
+export async function middleware(req) {
+  const { isAuthenticated } = getKindeServerSession(req);
   const isLoggedIn = await isAuthenticated();
 
-  // If the user is not authenticated, they will be redirected in middleware
-  if (!isLoggedIn) {
-    // This should never run, since redirection happens in middleware
-    return <div>You must be logged in to view this page.</div>;
+  // If the user is logged in and trying to access the login page, redirect to profile page
+  if (isLoggedIn && req.url.includes('/api/auth/login')) {
+    return NextResponse.redirect(new URL('/profile', req.url));
   }
 
-  // Display the protected content if the user is authenticated
-  return (
-    <div>
-      <h1>Welcome to your profile!</h1>
-      <p>This page is protected and only accessible to authenticated users.</p>
-    </div>
-  );
+  // If not authenticated, redirect to login page
+  if (!isLoggedIn) {
+    return NextResponse.redirect(new URL('/api/auth/login', req.url));
+  }
+
+  // Allow the request to proceed if authenticated
+  return NextResponse.next();
 }
+
+// Apply middleware only to the /profile path
+export const config = {
+  matcher: ['/profile'],
+};
