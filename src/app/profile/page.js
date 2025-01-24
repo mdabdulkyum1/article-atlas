@@ -1,20 +1,20 @@
-
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-
-import {redirect} from "next/navigation";
+import { redirect } from "next/navigation";
 
 export default async function ProfilePage() {
-  
-  const {isAuthenticated} = getKindeServerSession();
+  const { isAuthenticated, user } = getKindeServerSession();
 
+  // Redirect to the login page if not authenticated, with post-login redirect URL
   if (!(await isAuthenticated())) {
-    redirect("/api/auth/login");
+    redirect(`/api/auth/login?post_login_redirect_url=/profile`);
   }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-light-gray px-4 py-8">
       <div className="w-full max-w-md p-6 bg-white rounded-xl shadow-lg space-y-6">
-        <h1 className="text-3xl font-semibold text-center text-primary">Welcome to your profile!</h1>
+        <h1 className="text-3xl font-semibold text-center text-primary">
+          Welcome to your profile!
+        </h1>
         <p className="text-center text-lg text-dark-gray">
           Your username is:{" "}
           <span className="font-semibold text-primary">
@@ -30,6 +30,3 @@ export default async function ProfilePage() {
     </div>
   );
 }
-
-
-
