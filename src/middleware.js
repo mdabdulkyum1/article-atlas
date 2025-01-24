@@ -5,7 +5,7 @@ export async function middleware(req) {
   const { isAuthenticated } = getKindeServerSession(req);
   const isLoggedIn = await isAuthenticated();
 
-  if (isLoggedIn && req.url.includes('/api/auth/login')) {
+  if (isLoggedIn) {
     return NextResponse.redirect(new URL('/profile', req.url));
   }
 
