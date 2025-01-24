@@ -1,16 +1,37 @@
+'use client'
+ 
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-const Navbar = () => {
+const Navbar = ({user}) => {
+  const pathname = usePathname();
+
   const links = (
     <>
       <li>
-        <Link href="/">Home</Link>
+        <Link
+          href="/"
+          className={`${
+            pathname === "/" ? "font-bold border-gray-800 border-b-2" : ""
+          }`}
+        >
+          Home
+        </Link>
       </li>
       <li>
-        <Link href="/profile">Profile</Link>
+        <Link
+          href="/profile"
+          className={`${
+            pathname === "/profile" ? "font-bold border-gray-800 border-b-2" : ""
+          }`}
+        >
+          Profile
+        </Link>
       </li>
     </>
   );
+  
+  console.log(user);
 
   return (
     <nav className="navbar bg-base-100">
@@ -45,10 +66,32 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end gap-3">
-        <Link href="/api/auth/login" className="btn btn-sm bg-slate-600 text-white">Sign in</Link>
-        <Link href="/api/auth/register" className="btn btn-sm bg-slate-600 text-white">Sign up</Link>
+
+      
+      {
+        user ? <Link href="/api/auth/logout" className="btn btn-sm bg-slate-600 text-white">Log out</Link> 
+        :
+        <div className="">
+          <Link
+          href="/api/auth/login"
+          className="btn btn-sm bg-slate-600 text-white"
+        >
+          Sign in
+        </Link>
+        <Link
+          href="/api/auth/register"
+          className="btn btn-sm bg-slate-600 text-white"
+        >
+          Sign up
+        </Link>
+        </div>
+
+      }
+
+
+
       </div>
-    </nav> 
+    </nav>
   );
 };
 
