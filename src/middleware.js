@@ -1,18 +1,19 @@
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { NextResponse } from "next/server";
-
-export async function middleware(req) {
-  const { isAuthenticated } = getKindeServerSession(req);
-  const isLoggedIn = await isAuthenticated();
-  console.log(isLoggedIn);
-
-  if (!isLoggedIn) {
-    return NextResponse.redirect(new URL('/api/auth/login', req.url));
+import {withAuth} from "@kinde-oss/kinde-auth-nextjs/middleware";
+export default withAuth(
+  async function middleware(req) {
+    console.log("look at me", req.kindeAuth);
+  },
+  {
+    isReturnToCurrentPage: true,
+    loginPage: "/login",
+    publicPaths: ["/public", '/more'],
+    isAuthorized: ({token}) => {
+      // The user will be considered authorized if they have the permission 'eat:chips'
+      return token.permissions.includes("eat:chips");
+    }
   }
-
-  return NextResponse.next();
-}
+);
 
 export const config = {
-  matcher: ['/profile'],
+  matcher: ["/profile"]
 };
