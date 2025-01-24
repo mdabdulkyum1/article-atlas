@@ -4,7 +4,8 @@ import { redirect } from "next/navigation";
 export default async function ProfilePage() {
   const { isAuthenticated, getUser } = getKindeServerSession();
  
-  const user = getUser();
+  const user = await getUser();
+
   
   if (!(await isAuthenticated())) {
     redirect(`/api/auth/login?post_login_redirect_url=/profile`);
